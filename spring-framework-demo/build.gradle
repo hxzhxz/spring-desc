@@ -1,0 +1,23 @@
+plugins {
+    id 'groovy'
+}
+
+group 'org.springframework'
+version '5.2.22.RELEASE'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:4.0.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    compile(project(":spring-beans"))
+    compile(project(":spring-context"))
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+test {
+    useJUnitPlatform()
+}
