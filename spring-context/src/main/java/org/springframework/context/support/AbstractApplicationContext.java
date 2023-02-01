@@ -601,7 +601,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				//检查侦听器bean并注册它们。
 				registerListeners();
 				// Instantiate all remaining (non-lazy-init) singletons.
-				// 实例化所有剩余的(非lazy-init)单例。  由于在spring初始化的时候实例化了对应的BeanFactoryPostProcessor，BeanPostProcessor，messageSource，applicationEventMulticaster类型的bean,这里实例化剩余的bean
+				// 实例化所有剩余的(非lazy-init)单例。
+				// 由于在spring初始化的时候实例化了对应的BeanFactoryPostProcessor，BeanPostProcessor，messageSource，applicationEventMulticaster类型的bean,这里实例化剩余的bean
 				finishBeanFactoryInitialization(beanFactory);
 				// Last step: publish corresponding event.
 				finishRefresh();
