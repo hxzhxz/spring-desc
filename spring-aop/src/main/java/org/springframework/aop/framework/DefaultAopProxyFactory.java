@@ -38,10 +38,10 @@ import org.springframework.aop.SpringProxy;
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
- * @since 12.03.2004
  * @see AdvisedSupport#setOptimize
  * @see AdvisedSupport#setProxyTargetClass
  * @see AdvisedSupport#setInterfaces
+ * @since 12.03.2004
  */
 public class DefaultAopProxyFactory implements AopProxyFactory, Serializable {
 
@@ -50,6 +50,7 @@ public class DefaultAopProxyFactory implements AopProxyFactory, Serializable {
 
 	@Override
 	public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException {
+		//选择cglib 还是 jdk 来创建aop对象。设置isProxyTargetClass = true 则用cglib代理。
 		if (config.isOptimize() || config.isProxyTargetClass() || hasNoUserSuppliedProxyInterfaces(config)) {
 			Class<?> targetClass = config.getTargetClass();
 			if (targetClass == null) {
@@ -60,8 +61,7 @@ public class DefaultAopProxyFactory implements AopProxyFactory, Serializable {
 				return new JdkDynamicAopProxy(config);
 			}
 			return new ObjenesisCglibAopProxy(config);
-		}
-		else {
+		} else {
 			return new JdkDynamicAopProxy(config);
 		}
 	}
