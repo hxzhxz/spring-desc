@@ -36,6 +36,10 @@ import org.springframework.transaction.TransactionDefinition;
  * details on method visibility constraints, consult the
  * <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction">Transaction Management</a>
  * section of the reference manual.
+ * <p>
+ * 描述单个方法或类上的事务属性。
+ * 当在类级别声明此注释时，它将作为默认值应用于声明类及其子类的所有方法。注意，它不适用于类层次结构上的祖先类;
+ * 继承的方法需要在局部重新声明，以便参与子类级注释
  *
  * <p>This annotation type is generally directly comparable to Spring's
  * {@link org.springframework.transaction.interceptor.RuleBasedTransactionAttribute}
@@ -44,6 +48,14 @@ import org.springframework.transaction.TransactionDefinition;
  * does not have to know about annotations. If no custom rollback rules apply,
  * the transaction will roll back on {@link RuntimeException} and {@link Error}
  * but not on checked exceptions.
+ * <p>
+ * 这个注释类型通常与Spring的注释类型直接比较
+ * {@link org.springframework.transaction.interceptor.RuleBasedTransactionAttribute}
+ * 类，实际上{@link AnnotationTransactionAttributeSource}将直接
+ * 将数据转换为后一个类，以便Spring的事务支持代码
+ * 不需要知道注释。如果不应用自定义回滚规则，
+ * 事务将回滚{@link RuntimeException}和{@link Error}
+ * 但不是检查异常。
  *
  * <p>For specific information about the semantics of this annotation's attributes,
  * consult the {@link org.springframework.transaction.TransactionDefinition} and
@@ -53,12 +65,24 @@ import org.springframework.transaction.TransactionDefinition;
  * {@link org.springframework.transaction.PlatformTransactionManager}, exposing a
  * transaction to all data access operations within the current execution thread.
  * <b>Note: This does NOT propagate to newly started threads within the method.</b>
+ * <p>
+ * 类管理的线程绑定事务通常使用此注释
+ * {@link org.springframework.transaction。PlatformTransactionManager}，公开一个
+ * 事务到当前执行线程内的所有数据访问操作。
+ * <b>注意:这不会传播到方法中新启动的线程。
  *
  * <p>Alternatively, this annotation may demarcate a reactive transaction managed
  * by a {@link org.springframework.transaction.ReactiveTransactionManager} which
  * uses the Reactor context instead of thread-local variables. As a consequence,
  * all participating data access operations need to execute within the same
  * Reactor context in the same reactive pipeline.
+ *
+ * <p>
+ * 或者，此注释可以划分一个受管理的响应式事务
+ * 通过一个{@link org.springframework.transaction。ReactiveTransactionManager},
+ * 使用Reactor上下文而不是线程局部变量。因此，
+ * 所有参与的数据存取操作必须在同一时间内执行
+ * 同一反应管道中的反应堆环境。
  *
  * @author Colin Sampaleanu
  * @author Juergen Hoeller
